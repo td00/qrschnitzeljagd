@@ -1,6 +1,6 @@
 <?php
       //Include the necessary library for Ubuntu
-      include('/usr/share/phpqrcode/qrlib.php');
+      include '/res/phpqrcode/qrlib.php';
       $qrcode = $_GET["data"];
       $server = $_SERVER["SERVER_NAME"];
       $code = "https://".$server."/found.php?code=".$qrcode;
@@ -19,11 +19,5 @@
       //Display the QR image
       echo "<img src='".$filename."'>";
 
-    echo $qrcode;
-    echo "<br>";
-    echo $server;
-    echo "<br>";
-    echo $code;
-    echo "<br><hr><br>";
 ?>
 
