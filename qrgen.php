@@ -15,9 +15,8 @@
       //Set the frame size
       $frame_size = 8;
       //Generates QR image
-      QRcode::png($text, $filename, $e_correction, $pixel_size, $frame_size);
-      //Display the QR image
-      echo "<img src='".$filename."'>";
+      QRcode::png($text);
 
 ?>
+<img src="qrgen.php" />
 
