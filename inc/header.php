@@ -11,7 +11,7 @@
      <meta name="author" content="">
 
 
-     <title>QR Schnitzeljagd <?php $_SERVER["SCRIPT_NAME"] ?></title>
+     <title>QR Schnitzeljagd <?php echo $_SERVER["SCRIPT_NAME"]; ?></title>
 
 
      <link href="res/css/bootstrap.min.css" rel="stylesheet">
