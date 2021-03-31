@@ -1,5 +1,5 @@
 <?php
-      $qrcode = $_GET["data"];
+      $qrcode = $_GET["code"];
       $server = $_SERVER["SERVER_NAME"];
       $code = "https://".$server."/found.php?code=".$qrcode;
 ?>
