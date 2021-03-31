@@ -1,5 +1,5 @@
 CREATE DATABASE data;
-CREATE USER 'data'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE USER 'data'@'localhost' IDENTIFIED BY 'password';
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON data.* TO 'data'@'localhost';
 USE data;
 CREATE TABLE `codes` (
