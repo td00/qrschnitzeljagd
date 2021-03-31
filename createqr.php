@@ -75,6 +75,7 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
             echo 'Error. Please try again!<br>'; //else, print the form and try again
         }
  }
+}
 if($showFormular) { //this prints the form which begins after the closing brackets of php
 ?>
 <script src="ressources/js/bootstrap.min.js"></script>
