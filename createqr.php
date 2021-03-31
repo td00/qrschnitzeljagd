@@ -63,7 +63,7 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
      echo "<br>to: ".$to;
      echo "<br>text: ".$text;
      echo "<br>location: ".$location;
-     echo "<br><br><hr><br><br>"   
+     echo "<br><br><hr><br><br>";   
      $statement = $pdo->prepare("INSERT INTO codes (qrcode, from, to, text, location, counter) VALUES (:qrcode, :from, :to, :text, :location, '0')");
         $result = $statement->execute(array('qrcode' => $qrcode, 'from' => $from, 'to' => $to, 'text' => $text, 'location' => $location));
         
