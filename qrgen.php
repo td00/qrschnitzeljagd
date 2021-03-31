@@ -1,22 +1,20 @@
 <?php
-      //Include the necessary library for Ubuntu
-      include '/res/phpqrcode/qrlib.php';
       $qrcode = $_GET["data"];
       $server = $_SERVER["SERVER_NAME"];
       $code = "https://".$server."/found.php?code=".$qrcode;
-      //Set the data for QR
-      $text = $code;
-      //Set the filename with unique id
-      $filename = $qrcode.".png";
-      //Set the error correction Level('L')
-      $e_correction = 'L';
-      //Set pixel size
-      $pixel_size = 12;
-      //Set the frame size
-      $frame_size = 8;
-      //Generates QR image
-      QRcode::png($text);
-
 ?>
-<img src="qrgen.php" />
-
+<div id="qrcode"></div>
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: "<?php echo $code; ?>",
+	width: 128,
+	height: 128,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+</script>
+<br /> <br /><hr /><br />
+<?php
+echo $code;
+?>
