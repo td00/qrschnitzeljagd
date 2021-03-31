@@ -8,7 +8,7 @@ source: https://github.com/td00/loginpagefoo
 license: AGPL 3.0
 */
 session_start(); //everytime we want to use $_SESSION or features regarding a valid session we need to start this
-include 'inc/db.php'; //this is used to establish database connections thruout the app
+include 'inc/header.php'; //this is used to establish database connections thruout the app
 
 /*
 after this were building the default html page
@@ -18,26 +18,26 @@ We're using some bootstrap stuff here and later on for design purposes. Otherwis
 
 $showFormular = true; //default: render the form
 
-    //this function has worked in the past. why should it fail me now?!
-    function random_string() {
-        if(function_exists('random_bytes')) {
-            $bytes = random_bytes(16);
-            $str = bin2hex($bytes); 
-        } else if(function_exists('openssl_random_pseudo_bytes')) {
-            $bytes = openssl_random_pseudo_bytes(16);
-            $str = bin2hex($bytes); 
-        } else if(function_exists('mcrypt_create_iv')) {
-            $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
-            $str = bin2hex($bytes); 
-        } else {
-           //this should be a unique string. if we use this in prod we should change this.
-            $str = md5(uniqid('thisisnotreallyrandombutthisstringheresomakethislongandmaybewith12345numberskthxbye', true));
-        } 
-    return $str;
-   }
+ 
    
-   
-if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
+if(isset($_GET['generate'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
+        //this function has worked in the past. why should it fail me now?!
+        function random_string() {
+            if(function_exists('random_bytes')) {
+                $bytes = random_bytes(16);
+                $str = bin2hex($bytes); 
+            } else if(function_exists('openssl_random_pseudo_bytes')) {
+                $bytes = openssl_random_pseudo_bytes(16);
+                $str = bin2hex($bytes); 
+            } else if(function_exists('mcrypt_create_iv')) {
+                $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+                $str = bin2hex($bytes); 
+            } else {
+               //this should be a unique string. if we use this in prod we should change this.
+                $str = md5(uniqid('thisisnotreallyrandombutthisstringheresomakethislongandmaybewith12345numberskthxbye', true));
+            } 
+        return $str;
+       }
     $error = false; //per default no error.
     $from = $_POST['from']; 
     $to = $_POST['to']; 
@@ -46,7 +46,7 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
     $qrcodeg = random_string();
     $qrcode = base64_encode($qrcodeg);
 
-   if(!$error) { //if no error uccored until now do the following:
+  
     $statement = $pdo->prepare("SELECT * FROM codes WHERE qrcode = :qrcode"); //check if the qrcode is already registered
     $result = $statement->execute(array('qrcode' => $qrcode));
     $user = $statement->fetch();
@@ -54,8 +54,7 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
     if($user !== false) { //if the query above does return something in the $user array, print an error
         echo '<div class="alert alert-danger" role="alert">QRCode already in use</div><br>';
         $error = true;
-    }    
-}
+    }
 
 
  if (!$error) {
@@ -81,7 +80,7 @@ if($showFormular) { //this prints the form which begins after the closing bracke
 <script src="ressources/js/bootstrap.min.js"></script>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-<form action="?createqr=1" method="post">
+<form action="?generate=1" method="post">
 
 <div class="form-group">
 <label for="from">from</label>
