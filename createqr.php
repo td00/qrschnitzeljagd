@@ -78,7 +78,7 @@ if($showFormular) { //this prints the form which begins after the closing bracke
 <script src="ressources/js/bootstrap.min.js"></script>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-<form action="?register=1" method="post">
+<form action="?createqr=1" method="post">
 
 <div class="form-group">
 <label for="from">from</label>
