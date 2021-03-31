@@ -18,15 +18,6 @@ We're using some bootstrap stuff here and later on for design purposes. Otherwis
 
 $showFormular = true; //default: render the form
 
-
-
-if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
-    $error = false; //per default no error.
-    $from = $_POST['from']; //get the variable for the email
-    $to = $_POST['to']; //same for username
-    $text = $_POST['text']; //same for givenName
-    $location = $_POST['location']; //same for lastName
-    
     //this function has worked in the past. why should it fail me now?!
     function random_string() {
         if(function_exists('random_bytes')) {
@@ -44,6 +35,13 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
         } 
     return $str;
    }
+
+if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
+    $error = false; //per default no error.
+    $from = $_POST['from']; //get the variable for the email
+    $to = $_POST['to']; //same for username
+    $text = $_POST['text']; //same for givenName
+    $location = $_POST['location']; //same for lastName
     $qrcode = random_string();
 
    if(!$error) { //if no error uccored until now do the following:
