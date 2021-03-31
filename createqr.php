@@ -35,7 +35,8 @@ $showFormular = true; //default: render the form
         } 
     return $str;
    }
-   $qrcode = base64(random_string());
+   $qrcodeg = random_string();
+   $qrcode = base64_encode($qrcodeg);
 if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
     $error = false; //per default no error.
     $from = $_POST['from']; //get the variable for the email
