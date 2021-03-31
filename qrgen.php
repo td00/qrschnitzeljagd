@@ -15,7 +15,3 @@ var qrcode = new QRCode(document.getElementById("qrcode"), {
 	correctLevel : QRCode.CorrectLevel.L
 });
 </script>
-<br /> <br /><hr /><br />
-<?php
-echo $code;
-?>
