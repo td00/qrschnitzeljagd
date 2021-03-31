@@ -8,7 +8,7 @@ source: https://github.com/td00/loginpagefoo
 license: AGPL 3.0
 */
 session_start(); //everytime we want to use $_SESSION or features regarding a valid session we need to start this
-include 'db.inc.php'; //this is used to establish database connections thruout the app
+include 'inc/db.php'; //this is used to establish database connections thruout the app
 
 /*
 after this were building the default html page
@@ -26,8 +26,6 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
     $to = $_POST['to']; //same for username
     $text = $_POST['text']; //same for givenName
     $location = $_POST['location']; //same for lastName
-    $qrcode = $_POST['']; //same for password
-    $password_confirm = $_POST['password_confirm']; //same for password_confirm
     
     //this function has worked in the past. why should it fail me now?!
     function random_string() {
@@ -46,47 +44,37 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
         } 
     return $str;
    }
-    
+    $qrcode = random_string();
 
-    if(!$error) { //if no error uccored until now do the following:
-        $statement = $pdo->prepare("SELECT * FROM users WHERE email = :email"); //check if the email address is already registered
-        $result = $statement->execute(array('email' => $email));
-        $user = $statement->fetch();
-        
-        if($user !== false) { //if the query above does return something in the $user array, print an error
-            echo '<div class="alert alert-danger" role="alert">already a user here</div><br>';
-            $error = true;
-        }    
-    }
-
-    if(!$error) { 
-        $statement = $pdo->prepare("SELECT * FROM users WHERE username = :username"); //check if the username is already registered
-        $result = $statement->execute(array('username' => $username));
-        $user = $statement->fetch();
-        
-        if($user !== false) { //if the query above does return something in the $user array, print an error
-            echo 'already a user here<br>';
-            $error = true;
-        }    
-    }
+   if(!$error) { //if no error uccored until now do the following:
+    $statement = $pdo->prepare("SELECT * FROM codes WHERE qrcode = :qrcode"); //check if the qrcode is already registered
+    $result = $statement->execute(array('qrcode' => $qrcode));
+    $user = $statement->fetch();
     
+    if($user !== false) { //if the query above does return something in the $user array, print an error
+        echo '<div class="alert alert-danger" role="alert">QRCode already in use</div><br>';
+        $error = true;
+    }    
+}
+
+   
     if(!$error) {    //if no error occured until now, proceed
-        $password_hash = password_hash($password, PASSWORD_DEFAULT); //lets hash the password with the default php function. this suffices for now.
+        $qrcode = password_hash($password, PASSWORD_DEFAULT); //lets hash the password with the default php function. this suffices for now.
         
-        //this is the giant mysql statement placing everything from the user input in the database:
-        //(also we're placing "isadmin"="0" & "activated"="0" at this point.)
-        $statement = $pdo->prepare("INSERT INTO users (email, username, givenName, activated, isadmin, lastName, password) VALUES (:email, :username, :givenName, '0', '0', :lastName, :password)");
-        $result = $statement->execute(array('email' => $email, 'username' => $username, 'givenName' => $givenName, 'lastName' => $lastName, 'password' => $password_hash));
+        
+    } 
+}
+ if (!$error) {
+        $statement = $pdo->prepare("INSERT INTO codes (qrcode, from, to, text, location) VALUES (:qrcode, :from, :to, :text, :location)");
+        $result = $statement->execute(array('qrcode' => $qrcode, 'from' => $from, 'to' => $to, 'text' => $text, 'location' => $location));
         
         if($result) {        
-            echo '<div class="alert alert-success" role="alert">successfull registered. <a href="login.php">Login</a></div><meta http-equiv="refresh" content="1; URL=login.php">'; //if this was successfull, go to the login page.
+            echo '<div class="alert alert-success" role="alert">successfull registered. <a href="found.php?code='.$qrcode.'">Look at the result</a></div><meta http-equiv="refresh" content="1; URL=fround.php?code='.$qrcode.'">'; //if this was successfull, go to the login page.
             $showFormular = false; //also dont print the form again, if we're registered.
         } else {
             echo 'Error. Please try again!<br>'; //else, print the form and try again
         }
-    } 
-}
- 
+ }
 if($showFormular) { //this prints the form which begins after the closing brackets of php
 ?>
 <script src="ressources/js/bootstrap.min.js"></script>
@@ -95,35 +83,25 @@ if($showFormular) { //this prints the form which begins after the closing bracke
 <form action="?register=1" method="post">
 
 <div class="form-group">
-<label for="email">Email address</label>
-<input type="email" class="form-control" size="40" id="email" placeholder="invalid@example.com" name="email">
+<label for="from">from</label>
+<input type="text" class="form-control" size="40" id="from" placeholder="Your Name" name="from">
 </div>
 
 <div class="form-group">
-<label for="username">Username</label>
-<input type="text" class="form-control" size="40" id="username" placeholder="Username" name="username">
+<label for="to">to</label>
+<input type="text" class="form-control" size="40" id="to" placeholder="Receipients Name" name="to">
 </div>
 
 <div class="form-group">
-<label for="givenName">Given Name</label>
-<input type="text" class="form-control" size="40" id="givenName" placeholder="Martha" name="givenName">
+<label for="givenName">text</label>
+<input type="text" class="form-control" size="40" id="text" placeholder="You found the qr code! Jay!" name="text">
 </div>
 <div class="form-group">
-<label for="lastName">Family Name</label>
-<input type="text" class="form-control" size="40" id="lastName" placeholder="Musterfrau" name="lastName">
-</div>
-
-<div class="form-group">
-<label for="password">Password</label>
-<input type="password" class="form-control" size="40" id="password" placeholder="Please enter password" name="password">
-</div>
-
-<div class="form-group"> 
-<label for="password_confirm">Password (again):</label>
-<input type="password" class="form-control" id="password_confirm" size="40" name="password_confirm" placeholder="Please confirm password">
+<label for="lastName">location</label>
+<input type="text" class="form-control" size="40" id="location" placeholder="Under the kitchen sink" name="location">
 </div>
  
-<button type="submit" class="btn btn-primary">Register</button>
+<button type="submit" class="btn btn-primary">Create</button>
 
 </form>
  </div></div>
