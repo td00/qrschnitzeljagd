@@ -18,33 +18,35 @@ We're using some bootstrap stuff here and later on for design purposes. Otherwis
 
 $showFormular = true; //default: render the form
 
+function random_string() {
+    if(function_exists('random_bytes')) {
+        $bytes = random_bytes(16);
+        $str = bin2hex($bytes); 
+    } else if(function_exists('openssl_random_pseudo_bytes')) {
+        $bytes = openssl_random_pseudo_bytes(16);
+        $str = bin2hex($bytes); 
+    } else if(function_exists('mcrypt_create_iv')) {
+        $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+        $str = bin2hex($bytes); 
+    } else {
+       //this should be a unique string. if we use this in prod we should change this.
+        $str = md5(uniqid('thisisnotreallyrandombutthisstringheresomakethislongandmaybewith12345numberskthxbye', true));
+    } 
+return $str;
+}
+$qrcodeg = random_string();
+$qrcode = base64_encode($qrcodeg);
  
    
 if(isset($_GET['generate'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
         //this function has worked in the past. why should it fail me now?!
-        function random_string() {
-            if(function_exists('random_bytes')) {
-                $bytes = random_bytes(16);
-                $str = bin2hex($bytes); 
-            } else if(function_exists('openssl_random_pseudo_bytes')) {
-                $bytes = openssl_random_pseudo_bytes(16);
-                $str = bin2hex($bytes); 
-            } else if(function_exists('mcrypt_create_iv')) {
-                $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
-                $str = bin2hex($bytes); 
-            } else {
-               //this should be a unique string. if we use this in prod we should change this.
-                $str = md5(uniqid('thisisnotreallyrandombutthisstringheresomakethislongandmaybewith12345numberskthxbye', true));
-            } 
-        return $str;
-       }
+
     $error = false; //per default no error.
     $from = $_POST['from']; 
     $to = $_POST['to']; 
     $text = $_POST['text']; 
     $location = $_POST['location'];
-    $qrcodeg = random_string();
-    $qrcode = base64_encode($qrcodeg);
+
 
   
     $statement = $pdo->prepare("SELECT * FROM codes WHERE qrcode = :qrcode"); //check if the qrcode is already registered
