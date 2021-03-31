@@ -35,14 +35,14 @@ $showFormular = true; //default: render the form
         } 
     return $str;
    }
-
+   $qrcode = base64(random_string());
 if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
     $error = false; //per default no error.
     $from = $_POST['from']; //get the variable for the email
     $to = $_POST['to']; //same for username
     $text = $_POST['text']; //same for givenName
     $location = $_POST['location']; //same for lastName
-    $qrcode = random_string();
+    
 
    if(!$error) { //if no error uccored until now do the following:
     $statement = $pdo->prepare("SELECT * FROM codes WHERE qrcode = :qrcode"); //check if the qrcode is already registered
@@ -55,12 +55,6 @@ if(isset($_GET['createqr'])) { //checking if "?createqr=1" is set in the url. us
     }    
 }
 
-   
-    if(!$error) {    //if no error occured until now, proceed
-        $qrcode = password_hash($password, PASSWORD_DEFAULT); //lets hash the password with the default php function. this suffices for now.
-        
-        
-    } 
 }
  if (!$error) {
         $statement = $pdo->prepare("INSERT INTO codes (qrcode, from, to, text, location, counter) VALUES (:qrcode, :from, :to, :text, :location, '0')");
