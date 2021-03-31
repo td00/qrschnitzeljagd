@@ -104,6 +104,7 @@ if($showFormular) { //this prints the form which begins after the closing bracke
 </form>
  </div></div>
 <?php
+echo $qrcode;
 } //we need to close the if statement again.
 ?>
  
