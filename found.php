@@ -15,10 +15,30 @@ $schnitzel_id = $user['id'];
 $schnitzel_old_counter = $user['schnitzel_counter'];
 $schnitzel_counter = $schnitzel_old_counter + 1;
 
+echo $schnitzel_counter;
+
+echo "<br>";
+
+echo $schnitzel_old_counter;
+echo "<hr>";
 //update the counter
 
 $statement = $pdo->prepare("UPDATE codes SET schnitzel_counter = :schnitzel_counter WHERE id = :schnitzel_id");
  $result = $statement->execute(array('schnitzel_id'=> $schnitzel_id, 'schnitzel_counter'=> $schnitzel_counter ));
+
+ $statement = $pdo->prepare("SELECT * FROM codes WHERE schnitzel_qrcode = :schnitzel_qrcode"); //check if the qrcode is already registered
+ $result = $statement->execute(array('schnitzel_qrcode' => $schnitzel_qrcode));
+ $user = $statement->fetch();
+ $schnitzel_old_counter = $user['schnitzel_counter'];
+
+ echo $schnitzel_counter;
+
+echo "<br>";
+
+echo $schnitzel_old_counter;
+
+echo "<hr>";
+
 
 echo '<div class="alert alert-info" role="alert">Found Schnitzel No:'.$schnitzel_id.'</div>';
 echo "<br/>";
