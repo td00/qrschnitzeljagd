@@ -6,7 +6,7 @@ $schnitzel_qrcode = $_GET['code'];
 <center>
 <script>
 window.onload = function() {
-    var body = 'src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"';
+    var body = 'qrcode';
     var newWin = document.getElementById('printf').contentWindow;
     newWin.document.write(body);
     newWin.document.close(); //important!
@@ -15,7 +15,7 @@ window.onload = function() {
 }
 </script>
 
-<iframe id="printf"></iframe>
+<iframe id="printf" src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
 
 <br /><br /><br /><hr /><br /><br /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
