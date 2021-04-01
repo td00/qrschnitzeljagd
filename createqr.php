@@ -34,18 +34,18 @@ function random_string() {
     } 
 return $str;
 }
-$qrcodeg = random_string();
-$qrcode = base64_encode($qrcodeg);
+$qrcode = random_string();
+$schnitzel_qrcode = base64_encode($qrcodeg);
  
    
-if(isset($_GET['generate'])) { //checking if "?createqr=1" is set in the url. used to have the registration on the same page
+if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. used to have the registration on the same page
         //this function has worked in the past. why should it fail me now?!
 
     $error = false; //per default no error.
-    $from = $_POST['from']; 
-    $to = $_POST['to']; 
-    $text = $_POST['text']; 
-    $location = $_POST['location'];
+    $schnitzel_from = $_POST['from']; 
+    $schnitzel_to = $_POST['to']; 
+    $schnitzel_text = $_POST['text']; 
+    $schnitzel_location = $_POST['location'];
 
 
   
@@ -60,21 +60,22 @@ if(isset($_GET['generate'])) { //checking if "?createqr=1" is set in the url. us
 
 
  if (!$error) {
-     echo "<br>qrcode: ".$qrcode;
-     echo "<br>from: ".$from;
-     echo "<br>to: ".$to;
-     echo "<br>text: ".$text;
-     echo "<br>location: ".$location;
+     echo "<br>qrcode: ".$schnitzel_qrcode;
+     echo "<br>from: ".$schnitzel_from;
+     echo "<br>to: ".$schnitzel_to;
+     echo "<br>text: ".$schnitzel_text;
+     echo "<br>location: ".$schnitzel_location;
      echo "<br><br><hr><br><br>";   
-     $statement = $pdo->prepare("INSERT INTO codes (qrcode, from, to, text, location, counter) VALUES (:qrcode, :from, :to, :text, :location, '0')");
-        $result = $statement->execute(array('qrcode' => $qrcode, 'from' => $from, 'to' => $to, 'text' => $text, 'location' => $location));
-        
-        if($result) {        
-            echo '<div class="alert alert-success" role="alert">successfull registered. <a href="found.php?code='.$qrcode.'">Look at the result</a></div><meta http-equiv="refresh" content="1; URL=fround.php?code='.$qrcode.'">'; //if this was successfull, go to the login page.
-            $showFormular = false; //also dont print the form again, if we're registered.
-        } else {
-            echo 'Error. Please try again!<br>'; //else, print the form and try again
-        }
+     $statement = $pdo->prepare("INSERT INTO codes (schnitzel_qrcode, schnitzel_from, schnitzel_to, schnitzel_text, schnitzel_location, schnitzel_counter) VALUES (:schnitzel_qrcode, :schnitzel_from, :schnitzel_to, :schnitzel_text, :schnitzel_location, '0')");
+     $result = $statement->execute(array('schnitzel_qrcode' => $schnitzel_qrcode, 'schnitzel_from' => $schnitzel_from, 'schnitzel_to' => $schnitzel_to, 'schnitzel_text' => $schnitzel_text, 'schnitzel_location' => $schnitzel_location));
+       
+     
+    if($result) {        
+        echo '<div class="alert alert-success" role="alert">successfull registered. <a href="found.php?code='.$qrcode.'">Look at the result</a></div><meta http-equiv="refresh" content="1; URL=fround.php?code='.$qrcode.'">'; //if this was successfull, go to the login page.
+        $showFormular = false; //also dont print the form again, if we're registered.
+    } else {
+        echo 'Error. Please try again!<br>'; //else, print the form and try again
+    }
  }
 }
 if($showFormular) { //this prints the form which begins after the closing brackets of php
