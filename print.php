@@ -6,7 +6,6 @@ $schnitzel_qrcode = $_GET['code'];
 <center>
 <script>
 window.onload = function() {
-    var body = 'qrcode';
     var newWin = document.getElementById('printf').contentWindow;
     newWin.document.write(body);
     newWin.document.close(); //important!
