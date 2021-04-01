@@ -7,7 +7,6 @@ contact: contactme@td00.de
 source: https://github.com/td00/loginpagefoo
 license: AGPL 3.0
 */
-session_start(); //everytime we want to use $_SESSION or features regarding a valid session we need to start this
 include 'inc/header.php'; //this is used to establish database connections thruout the app
 
 /*
