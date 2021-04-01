@@ -1,3 +1,4 @@
 inc/db.php
 inc/secrets.php
 *.DS_Store
+db.dev.sql
