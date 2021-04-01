@@ -79,9 +79,11 @@ echo "</tr>";
 <!--<a href="rawdata.php"><button class="btn btn-black">Raw Data</button></a>-->
 <br/>
 
-<a href="print.php?qrcode=<?php echo $schnitzel_qrcode; ?>"><button class="btn btn-success">Print</button></a>
+<a href="print.php?code=<?php echo $schnitzel_qrcode; ?>"><button class="btn btn-success">Print</button></a>
 <br/>
+<br>
+<br />
 
-<a href="mailto:abuse+schnitzel@thiesmueller.de"><button class="btn btn-danger">Delete this!</button></a>
+<a href="mailto:abuse+schnitzel@thiesmueller.de"><button class="btn btn-danger">Delete this!</button></a>#
 </body>
 </html>
