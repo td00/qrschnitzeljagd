@@ -64,8 +64,8 @@ echo "<td>";
 if ($schnitzel_old_counter == 0) { //if not admin, print "User" in green
     echo '<p class="text-success">No</p><br>';
 }
-if ($schnitzel_old_counter == 1) { //if admin, print so but in red
-    echo '<p class="text-danger">Yes</p>';
+else { 
+    echo '<p class="text-danger">Yes ('.$schnitzel_old_counter.' times)</p>';
 }
 echo "</td>";
 echo "</tr>";
