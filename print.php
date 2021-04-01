@@ -9,8 +9,8 @@ $schnitzel_qrcode = $_GET['code'];
             var divContents = document.getElementById("GFG").innerHTML;
             var a = window.open('', '', 'height=500, width=500');
             a.document.write('<html>');
-            a.document.write('<body > <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>');
-            a.document.write('</body></html>');
+            a.document.write('<body><center> <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>');
+            a.document.write('<center></body></html>');
             a.document.close();
             a.print();
         }
@@ -21,11 +21,11 @@ $schnitzel_qrcode = $_GET['code'];
 
 <br /><br />
 <div id="GFG" style="">
-          
+          <hr />
           <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
-        
+        <br /><br />
       <input class="btn btn-success" type="button" value="Print" onclick="printDiv()">
-<br /><hr /><br /><br /><br />
+<br /><hr /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
 
 <script>
