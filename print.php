@@ -11,7 +11,6 @@ $schnitzel_qrcode = $_GET['code'];
             a.document.write('<html>');
             a.document.write('<body><center> <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>');
             a.document.write('<center></body></html>');
-            await delay(2000);
             a.document.close();
             a.print();
         }
