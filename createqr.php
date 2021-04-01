@@ -62,7 +62,7 @@ if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. us
  if (!$error) {
      $statement = $pdo->prepare("INSERT INTO codes (schnitzel_qrcode, schnitzel_from, schnitzel_to, schnitzel_text, schnitzel_location, schnitzel_counter) VALUES (:schnitzel_qrcode, :schnitzel_from, :schnitzel_to, :schnitzel_text, :schnitzel_location, '0')");
      $result = $statement->execute(array('schnitzel_qrcode' => $schnitzel_qrcode, 'schnitzel_from' => $schnitzel_from, 'schnitzel_to' => $schnitzel_to, 'schnitzel_text' => $schnitzel_text, 'schnitzel_location' => $schnitzel_location));
-     $qrcode_goto = $schnitzel_qrcode  
+     $qrcode_goto = $schnitzel_qrcode;
      
     if($result) {        
         echo '<div class="alert alert-success" role="alert">successfull registered. <a href="found.php?code='.$qrcode_goto.'">Look at the result</a></div><meta http-equiv="refresh" content="1; URL=found.php?code='.$qrcode_goto.'">'; //if this was successfull, go to the login page.
