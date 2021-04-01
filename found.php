@@ -58,10 +58,15 @@ echo "</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td>";
-echo "Counter:";
+echo "Already found:";
 echo "</td>";
 echo "<td>";
-echo $schnitzel_counter;
+if ($schnitzel_old_counter == 0) { //if not admin, print "User" in green
+    echo '<p class="text-success">No</p><br>';
+}
+if ($schnitzel_old_counter == 1) { //if admin, print so but in red
+    echo '<p class="text-danger">Yes</p>';
+}
 echo "</td>";
 echo "</tr>";
 ?>
