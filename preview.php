@@ -13,11 +13,6 @@ $schnitzel_to = $user['schnitzel_to'];
 $schnitzel_location = $user['schnitzel_location'];
 $schnitzel_id = $user['id'];
 $schnitzel_old_counter = $user['schnitzel_counter'];
-$schnitzel_counter = '1';
-
-//update the counter
-$statement = $pdo->prepare("INSERT INTO codes (schnitzel_counter) VALUES (:schnitzel_counter)");
-$result = $statement->execute(array('schnitzel_counter' => $schnitzel_counter));
 
 
 echo '<div class="alert alert-info" role="alert">Found Schnitzel No:'.$schnitzel_id.'</div>';
