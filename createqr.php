@@ -34,8 +34,7 @@ function random_string() {
     } 
 return $str;
 }
-$qrcode = random_string();
-$schnitzel_qrcode = base64_encode($qrcodeg);
+
  
    
 if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. used to have the registration on the same page
@@ -46,11 +45,12 @@ if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. us
     $schnitzel_to = $_POST['to']; 
     $schnitzel_text = $_POST['text']; 
     $schnitzel_location = $_POST['location'];
-
+    $qrcode = random_string();
+    $schnitzel_qrcode = base64_encode($qrcode);
 
   
-    $statement = $pdo->prepare("SELECT * FROM codes WHERE qrcode = :qrcode"); //check if the qrcode is already registered
-    $result = $statement->execute(array('qrcode' => $qrcode));
+    $statement = $pdo->prepare("SELECT * FROM codes WHERE schnitzel_qrcode = :schnitzel_qrcode"); //check if the qrcode is already registered
+    $result = $statement->execute(array('schnitzel_qrcode' => $schnitzel_qrcode));
     $user = $statement->fetch();
     
     if($user !== false) { //if the query above does return something in the $user array, print an error
