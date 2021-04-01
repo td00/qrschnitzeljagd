@@ -14,8 +14,10 @@ newWin.close();
 $("body",newWin).append(body+script);
 
 </script>
+
 <center>
-<iframe id="printf" src="qrgen.php?code=<?php echo $schnitzel_qrcode; ?>" />
+<iframe id="printf" src="qrgen.php?code=<?php echo $schnitzel_qrcode; ?>" >
+
 <br /><br /><br /><hr /><br /><br /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
 
