@@ -1,4 +1,5 @@
 <?php
+
 include 'inc/header.php';
 
 $schnitzel_qrcode = $_GET['code'];
@@ -13,7 +14,7 @@ $schnitzel_to = $user['schnitzel_to'];
 $schnitzel_location = $user['schnitzel_location'];
 $schnitzel_id = $user['id'];
 $schnitzel_old_counter = $user['schnitzel_counter'];
-
+$schnitzel_counter = $schnitzel_old_counter + 1;
 
 echo '<div class="alert alert-info" role="alert">Found Schnitzel No:'.$schnitzel_id.'</div>';
 echo "<br/>";
@@ -57,10 +58,10 @@ echo "Already found:";
 echo "</td>";
 echo "<td>";
 if ($schnitzel_old_counter == 0) { //if not admin, print "User" in green
-    echo '<p class="text-success">No</p><br>';
+    echo '<p class="text-success"><b>No<b></p><br>';
 }
-if ($schnitzel_old_counter == 1) { //if admin, print so but in red
-    echo '<p class="text-danger">Yes</p>';
+else { 
+    echo '<p class="text-danger"><b>Yes<b> <i>('.$schnitzel_old_counter.' times)</i></p>';
 }
 echo "</td>";
 echo "</tr>";
@@ -78,6 +79,7 @@ echo "</tr>";
 <!--<a href="rawdata.php"><button class="btn btn-black">Raw Data</button></a>-->
 <br/>
 
+<a href="print.php?qrcode=<?php echo $schnitzel_qrcode; ?>"><button class="btn btn-success">Print</button></a>
 <br/>
 
 <a href="mailto:abuse+schnitzel@thiesmueller.de"><button class="btn btn-danger">Delete this!</button></a>

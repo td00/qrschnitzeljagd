@@ -65,7 +65,7 @@ if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. us
      $qrcode_goto = $schnitzel_qrcode;
      
     if($result) {        
-        echo '<div class="alert alert-success" role="alert">successfull registered. <a href="found.php?code='.$qrcode_goto.'">Look at the result</a></div><meta http-equiv="refresh" content="1; URL=found.php?code='.$qrcode_goto.'">'; //if this was successfull, go to the login page.
+        echo '<div class="alert alert-success" role="alert">successfull registered. <a href="preview.php?code='.$qrcode_goto.'">Look at the Preview</a></div><meta http-equiv="refresh" content="1; URL=preview.php?code='.$qrcode_goto.'">'; //if this was successfull, go to the login page.
         $showFormular = false; //also dont print the form again, if we're registered.
     } else {
         echo 'Error. Please try again!<br>'; //else, print the form and try again
