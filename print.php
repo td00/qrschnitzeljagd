@@ -3,20 +3,19 @@ include 'inc/header.php';
 $schnitzel_qrcode = $_GET['code'];
 
 ?>
+<center>
 <script>
-var body = "dddddd"    
-var script = "<script>window.print();</scr'+'ipt>";
-
-var newWin = $("#printf")[0].contentWindow.document; 
-newWin.open();
-newWin.close();
-
-$("body",newWin).append(body+script);
-
+window.onload = function() {
+    var body = 'dddddd';
+    var newWin = document.getElementById('printf').contentWindow;
+    newWin.document.write(body);
+    newWin.document.close(); //important!
+    newWin.focus(); //IE fix
+    newWin.print();
+}
 </script>
 
-<center>
-<iframe id="printf" src="qrgen.php?code=<?php echo $schnitzel_qrcode; ?>" >
+<iframe id="printf"></iframe>
 
 <br /><br /><br /><hr /><br /><br /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
