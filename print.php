@@ -42,16 +42,20 @@ $schnitzel_old_counter = $user['schnitzel_counter'];
 
 
 <br /><br />
-<div id="QR" style="">
-</div>
-<div id="QRText" style="">
-</div>
+
+
           <hr />
           <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
         <br /><br />
+        <div id="QR" style="">
+
       <input class="btn btn-success" type="button" value="Print QR Only" onclick="printQR()">
+      </div>
       <br>
+      <div id="QRText" style="">
+
       <input class="btn btn-success" type="button" value="Print QR & Text" onclick="printQRText()">
+      </div>
 <br /><hr /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
 
