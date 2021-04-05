@@ -40,10 +40,14 @@ if(isset($_GET['generate'])) { //checking if "?generate=1" is set in the url. us
         //this function has worked in the past. why should it fail me now?!
 
     $error = false; //per default no error.
-    $schnitzel_from = $_POST['from']; 
-    $schnitzel_to = $_POST['to']; 
-    $schnitzel_text = $_POST['text']; 
-    $schnitzel_location = $_POST['location'];
+    $unsan_from = $_POST['from']; 
+    $unsan_to = $_POST['to']; 
+    $unsan_text = $_POST['text']; 
+    $unsan_location = $_POST['location'];
+    $schnitzel_from = strip_tags($unsan_from;);
+    $schnitzel_to = strip_tags($unsan_to);
+    $schnitzel_text = strip_tags($unsan_text);
+    $schnitzel_location = strip_tags($unsan_location);
     $qrcode = random_string();
     $schnitzel_qrcode = base64_encode($qrcode);
 
