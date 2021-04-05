@@ -41,7 +41,7 @@ $schnitzel_qrcode = $_GET['code'];
 
 <br><br>
 
-<button class="btn-success" onclick="printQRText()">Print QR & Text</button>
+<button class="btn btn-success" onclick="printQRText()">Print QR & Text</button>
 
 <br /><hr /><br />
 <button class="btn btn-info" onclick="goBack()">Back</button>
