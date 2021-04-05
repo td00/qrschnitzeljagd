@@ -22,7 +22,7 @@ $schnitzel_qrcode = $_GET['code'];
       </script>
       <script>
       function printQRText() {
-        window.open("print/qrtext.php?code=<?php echo $schnitel_qrcode;?>", '', 'height=500, width=500');
+        window.open("print/qrtext.php?code=<?php echo $schnitzel_qrcode;?>", '', 'height=500, width=500');
       }
 
       </script>
