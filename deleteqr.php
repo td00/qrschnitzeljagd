@@ -134,8 +134,7 @@ echo "</tr>";
 </form>
  </div></div>
 <?php
-echo $qrcode;
-} //we need to close the if statement again.
+
 ?>
  
 </body>
