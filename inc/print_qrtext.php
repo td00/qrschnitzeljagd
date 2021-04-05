@@ -24,7 +24,7 @@ $schnitzel_old_counter = $user['schnitzel_counter'];
 <h1>Schnitzel from <?php echo $schnitzel_from; ?></h1>
 <i>Just scan the QR Code below to get more Info:</i><br><br>
 
- <iframe src="/inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
+ <iframe frameBorder="0" src="/inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
 
 <br><br>
 <b>This QR Code is for <?php echo $schnitzel_to; ?></b>
