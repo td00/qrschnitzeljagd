@@ -86,6 +86,6 @@ echo "</tr>";
 
 <br/>
 
-<a href="mailto:abuse+schnitzel@thiesmueller.de"><button class="btn btn-danger">Delete this!</button></a>
+<a href="deleteqr.php?sid=<?php echo $schnitzel_id; ?>"><button class="btn btn-danger">Delete this!</button></a>
 </body>
 </html>
