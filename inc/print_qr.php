@@ -1,5 +1,5 @@
 <?php
-include '/inc/header.php';
+include 'header.php';
 $schnitzel_qrcode = $_GET['code'];
 
 

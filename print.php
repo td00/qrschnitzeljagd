@@ -17,12 +17,12 @@ $schnitzel_qrcode = $_GET['code'];
     </script>
     <script>
       function printQR() {
-        window.open("print/qr.php?code=<?php echo $schnitzel_qrcode;?>", '', 'height=500, width=500');
+        window.open("inc/print_qr.php?code=<?php echo $schnitzel_qrcode;?>", '', 'height=500, width=500');
       }
       </script>
       <script>
       function printQRText() {
-        window.open("print/qrtext.php?code=<?php echo $schnitzel_qrcode;?>", '', 'height=500, width=500');
+        window.open("inc/print_qrtext.php?code=<?php echo $schnitzel_qrcode;?>", '', 'height=500, width=500');
       }
 
       </script>
