@@ -33,7 +33,7 @@ $schnitzel_qrcode = $_GET['code'];
 <br /><br />
 <div id="GFG" style="">
           <hr />
-          <iframe src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
+          <iframe frameBorder="0" src="inc/qrgen.php?code=<?php echo $schnitzel_qrcode; ?>"></iframe>
 	<br /><br />
 
 <button class="btn btn-success" onclick="printQR()">Print QR Code</button>
