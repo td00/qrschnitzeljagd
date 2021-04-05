@@ -28,7 +28,7 @@ $schnitzel_to = $user['schnitzel_to'];
 $schnitzel_location = $user['schnitzel_location'];
 $schnitzel_old_counter = $user['schnitzel_counter'];
 
-?>
+
 
 
 
@@ -135,6 +135,7 @@ echo "</tr>";
  </div></div>
 <?php
 
+} //we need to close the if statement again.
 ?>
  
 </body>
