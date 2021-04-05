@@ -1,5 +1,5 @@
 <?php
-include '/inc/db.php';
+include 'db.php';
 ?>
 
 <head>
